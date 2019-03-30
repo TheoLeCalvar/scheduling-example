@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="ASCII"?>
+<scheduling:Project
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:scheduling="http://eris.eseo.fr/ATLC/Example/scheduling"
+    name="Foobar"
+    numberOfPeriods="5"
+    maxLoad="20">
+  <tasks title="Task001"
+      code="001"
+      description=""
+      cost="3.0">
+    
+    
+  </tasks>
+  <tasks title="Task002"
+      code="002"
+      description=""
+      cost="3.0">
+    
+    
+    <requisites
+        target="//@tasks.2"/>
+    <corequisites
+        target="//@tasks.17"/>
+  </tasks>
+  <tasks title="Task003"
+      code="003"
+      description=""
+      cost="3.0"
+      requisitedBy="//@tasks.1/@requisites.0">
+    
+    
+  </tasks>
+  <tasks title="Task004"
+      code="004"
+      description=""
+      cost="3.0"
+      requisitedBy="//@tasks.4/@requisites.0 //@tasks.7/@requisites.0 //@tasks.9/@requisites.0 //@tasks.12/@requisites.0 //@tasks.13/@requisites.0">
+    
+    
+    <corequisites
+        target="//@tasks.18"/>
+  </tasks>
+  <tasks title="Task005"
+      code="005"
+      description=""
+      cost="3.0">
+    
+    
+    <requisites
+        target="//@tasks.3"/>
+  </tasks>
+  <tasks title="Task006"
+      code="006"
+      description=""
+      cost="3.0"
+      requisitedBy="//@tasks.12/@requisites.1">
+    
+    
+  </tasks>
+  <tasks title="Task007"
+      code="007"
+      description=""
+      cost="3.0"
+      requisitedBy="//@tasks.12/@requisites.2 //@tasks.13/@requisites.1">
+    
+    
+    <requisites
+        target="//@tasks.10"/>
+  </tasks>
+  <tasks title="Task008"
+      code="008"
+      description=""
+      cost="3.0">
+    
+    
+    <requisites
+        target="//@tasks.3"/>
+    <requisites
+        target="//@tasks.10"/>
+  </tasks>
+  <tasks title="Task009"
+      code="009"
+      description=""
+      cost="3.0">
+    
+    <requisites
+        target="//@tasks.10"/>
+  </tasks>
+  <tasks title="Task010"
+      code="010"
+      description=""
+      cost="3.0">
+    
+    
+    <requisites
+        target="//@tasks.3"/>
+  </tasks>
+  <tasks title="Task011"
+      code="011"
+      description=""
+      cost="3.0"
+      requisitedBy="//@tasks.6/@requisites.0 //@tasks.7/@requisites.1 //@tasks.8/@requisites.0 //@tasks.11/@requisites.0">
+    
+    
+  </tasks>
+  <tasks title="Task012"
+      code="012"
+      description=""
+      cost="3.0">
+    
+    
+    <requisites
+        target="//@tasks.10"/>
+  </tasks>
+  <tasks title="Task013"
+      code="013"
+      description=""
+      cost="3.0">
+    
+    <requisites
+        target="//@tasks.3"/>
+    <requisites
+        target="//@tasks.5"/>
+    <requisites
+        target="//@tasks.6"/>
+  </tasks>
+  <tasks title="Task014"
+      code="014"
+      description=""
+      cost="4.0"
+      requisitedBy="//@tasks.14/@requisites.0">
+    
+    
+    <requisites
+        target="//@tasks.3"/>
+    <requisites
+        target="//@tasks.6"/>
+  </tasks>
+  <tasks title="Task015"
+      code="015"
+      description=""
+      cost="3.0">
+    
+    <requisites
+        target="//@tasks.13"/>
+  </tasks>
+  <tasks title="Task016"
+      code="016"
+      description=""
+      requisitedBy="//@tasks.16/@requisites.0">
+    
+    
+  </tasks>
+  <tasks title="Task017"
+      code="017"
+      description="">
+    
+    
+    <requisites
+        target="//@tasks.15"/>
+  </tasks>
+  <tasks title="Task018"
+      code="018"
+      description=""
+      cost="3.0"
+      corequisitedBy="//@tasks.1/@corequisites.0">
+    
+    
+  </tasks>
+  <tasks title="Task019"
+      code="019"
+      description=""
+      cost="3.0"
+      corequisitedBy="//@tasks.3/@corequisites.0">
+    
+    
+    <corequisites
+        target="//@tasks.19"/>
+  </tasks>
+  <tasks title="Task020"
+      code="020"
+      description=""
+      cost="3.0"
+      corequisitedBy="//@tasks.18/@corequisites.0">
+    
+    
+  </tasks>
+</scheduling:Project>

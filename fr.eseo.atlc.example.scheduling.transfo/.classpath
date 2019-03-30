@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-8-jdk"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="xtend-gen"/>
+	<classpathentry kind="lib" path="lib/atol.jar"/>
+	<classpathentry kind="lib" path="lib/antlr-runtime-3.0.jar"/>
+	<classpathentry kind="lib" path="lib/cassowary.jar"/>
+	<classpathentry kind="lib" path="lib/choco-solver-4.0.8.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,163 @@
+module courses2jfx;
+
+create OUT: JFX from IN: Scheduling;
+
+unique lazy rule Task {
+	from 
+		c: Scheduling!Task
+	to
+		g : JFX!Figure (
+			nodes <- Sequence {r, t},
+			constraints <-	Sequence {__constraintsCasso__},--, __constraintsChoco__},
+			children <- c.requisites->collectTo('Requisite').g->concat(
+					c.corequisites->collectTo('Corequisite').g
+				)
+		),
+		r : JFX!Rectangle (
+			movable <- true,
+			id <- c.code + '.r',
+			fill <- '0xffffffff',
+			stroke <- '0x424242ff'
+		),
+		t : JFX!Text (
+			id <- c.code + '.t',
+			text <- c.code,
+			textOrigin <- #TOP,
+			fill <- '0x424242ff',
+			mouseTransparent <- true
+		),
+		__constraintsCasso__: Constraints!ConstraintGroup (
+			solver <- 'cassowary',
+			constraints <- Sequence {
+				r.x >= 0
+				,r.y >= c.period->collectTo('Period').l.startY
+				,r.width = 1.5 * t.width.toConstant()
+				,r.height = 1.5 * t.height.toConstant()
+				,r.x.stay('MEDIUM')
+				,r.y.stay('MEDIUM')
+				,t.x = r.x + 5
+				,t.y = r.y + 2
+				,r.x >= c.period->collectTo('Period').r.x -- strong
+				,r.x + r.width <= c.period->collectTo('Period').r.x + c.period->collectTo('Period').r.width --strong
+				,r.y + r.height <= c.period->collectTo('Period').r.y + c.period->collectTo('Period').r.height
+			}
+		)
+}
+
+unique lazy rule Period {
+	from
+		s: Scheduling!Period
+	to
+		g: JFX!Figure (
+			nodes <- Sequence {r, t, l},
+			constraints <- Sequence {__constraintsCasso__, __constraintsChoco__}
+		),
+		r: JFX!Rectangle (
+			id <- 's' + s.number->collect(n | n + 1) + '.r',
+			fill <- '0x00000000',
+			stroke <- '0x424242ff',
+			mouseTransparent <- true
+		),
+		t: JFX!Text (
+			id <- 's' + s.number->collect(n | n + 1) + '.t',
+			text <- 'Period ' + s.number->collect(n | n + 1) + ' (' + s.load + ')',
+			textOrigin <- #TOP,
+			fill <- if s.load < 5 or s.load > 7
+						then '0xff0000ff'
+						else '0x424242ff'
+						endif,
+			mouseTransparent <- true
+		),
+		l : JFX!Line (
+			id <- 's' + s.number->collect(n | n + 1) + '.l',
+			stroke <- '0x424242ff'
+		),
+		__constraintsCasso__: Constraints!ConstraintGroup(
+			solver <- 'cassowary',
+			constraints <- Sequence {
+				r.y = 0,
+				r.x = s.number.toConstant() * r.width,
+				l.startX = r.x,
+				l.endX = r.x + r.width,
+				l.startY = t.y + t.height.toConstant() + 5,
+				l.endY = l.startY,
+				r.width = 125,
+				r.height = 300,
+				t.x = r.x + (r.width / 2) - (t.width.toConstant() / 2),
+				t.y = r.y + 5
+			}
+		),
+		__constraintsChoco__: Constraints!ConstraintGroup (
+			solver <- 'choco',
+			constraints <- Sequence {
+			}
+		)
+}
+
+unique lazy rule Requisite {
+	from
+		r : Scheduling!Requisite
+	to
+		g : JFX!Figure (
+			nodes <- Sequence {l},
+			constraints <- Sequence {__constraints__}
+		),
+		l : JFX!Arrow (
+			id <- 'rq_' + r.source.code + '_' + r.target.code + '.l',
+			stroke <- '0x424242ff',
+			phi <- 20,
+			barb <- 10,
+			hideable <- true
+		),
+		__constraints__ : Constraints!ConstraintGroup (
+			solver <- 'cassowary',
+			constraints <- Sequence {
+				l.fromX = 0 -- weak
+				,l.fromY = 0 -- weak
+				,l.fromX - l.toX = 0 -- weak 10
+				,l.fromY - l.toY = 0 -- weak 10
+				,l.fromX >= r.source->collectTo('Task').r.x
+				,l.fromX <= r.source->collectTo('Task').r.x + r.source->collectTo('Task').r.width
+				,l.fromY >= r.source->collectTo('Task').r.y
+				,l.fromY <= r.source->collectTo('Task').r.y + r.source->collectTo('Task').r.height
+				,l.toX >= r.target->collectTo('Task').r.x
+				,l.toX <= r.target->collectTo('Task').r.x + r.target->collectTo('Task').r.width
+				,l.toY >= r.target->collectTo('Task').r.y
+				,l.toY <= r.target->collectTo('Task').r.y + r.target->collectTo('Task').r.height
+			}
+		)
+}
+
+unique lazy rule Corequisite {
+	from
+		r : Scheduling!Corequisite
+	to
+		g : JFX!Figure (
+			nodes <- Sequence {l},
+			constraints <- Sequence {__constraints__}
+		),
+		l : JFX!Arrow (
+			id <- 'co_' + r.source.code + '_' + r.target.code + '.l',
+			stroke <- '0x00ff00ff',
+			phi <- 20,
+			barb <- 10,
+			hideable <- true
+		),
+		__constraints__ : Constraints!ConstraintGroup (
+			solver <- 'cassowary',
+			constraints <- Sequence {
+				l.fromX = 0 -- weak
+				,l.fromY = 0 -- weak
+				,l.fromX - l.toX = 0 -- weak 10
+				,l.fromY - l.toY = 0 -- weak 10
+				,l.fromX >= r.source->collectTo('Task').r.x
+				,l.fromX <= r.source->collectTo('Task').r.x + r.source->collectTo('Task').r.width
+				,l.fromY >= r.source->collectTo('Task').r.y
+				,l.fromY <= r.source->collectTo('Task').r.y + r.source->collectTo('Task').r.height
+				,l.toX >= r.target->collectTo('Task').r.x
+				,l.toX <= r.target->collectTo('Task').r.x + r.target->collectTo('Task').r.width
+				,l.toY >= r.target->collectTo('Task').r.y
+				,l.toY <= r.target->collectTo('Task').r.y + r.target->collectTo('Task').r.height
+			}
+		)
+}

@@ -1,0 +1,47 @@
+-- some constraints are CSP-like constraints, others are only OCL-like (e.g., derived properties)
+module SchedulingConstraints;
+create OUT : Scheduling refining IN : Scheduling;
+
+rule Task {
+	from 
+		c : Scheduling!Task
+	to
+		t : Scheduling!Task,
+		__constraintsChoco__: Constraints!ConstraintGroup (
+			solver <- 'choco',
+			constraints <- Sequence {
+				c.period.stay('WEAK'),
+				c.period.number < 5,
+				c.period.number >= 0,
+				c.period.number.".>"(c.requisites.target.period.number),
+				c.period.number.".="(c.corequisites.target1.period.number)
+			}
+		)
+}
+
+rule Period {
+	from
+		s : Scheduling!Period
+	to
+		t : Scheduling!Period (
+			-- specify how the totalCost derived property is (incrementally) computed
+			load <- s.tasks.cost->sumFloats()
+		),
+		__constraintsChoco__: Constraints!ConstraintGroup (
+			solver <- 'choco',
+			constraints <- Sequence {
+				(
+						s.project.tasks.cost.toConstant()
+					*
+						(
+							s.project.tasks.period.".="(s.toConstant())
+						).reify()
+				).sum() >= s.project.minLoad.toConstant(),
+				(s.project.tasks.cost.toConstant() *
+					(
+						s.project.tasks.period.".="(s.toConstant())
+					).reify()
+				).sum() <= s.project.maxLoad.toConstant()
+			}
+		)
+}
