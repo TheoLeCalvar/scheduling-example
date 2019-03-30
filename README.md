@@ -1,5 +1,14 @@
 # Scheduling Generator Case study
 
+This repository hosts an example of transformation that combines model transformation with constraints solving to generate an explorable model set.
+
+It is composed of a project containing the definition of the source model used by the transformation.
+It is a simple metamodel that defines Projects composed of Tasks and Periods.
+Tasks sjould be assigned to Period in order to create a schedule.
+
+The other project is the transformation.
+It consists of two sub-transformations, [one](fr.eseo.atlc.example.scheduling.transfo/scheduling2jfx.atl) generating the schedule from a source model, and the [other](fr.eseo.atlc.example.scheduling.transfo/SchedulingConstraints.atl) generating an interactive view.
+
 ## Install
 
 Clone this repository and import both project into eclipse.
