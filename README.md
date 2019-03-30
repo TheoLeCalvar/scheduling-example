@@ -11,7 +11,7 @@ It consists of two sub-transformations, [one](fr.eseo.atlc.example.scheduling.tr
 
 ## Install
 
-Clone this repository and import both project into eclipse.
+Clone this repository and import both projects into eclipse.
 
 You need to install these dependencies:
 
