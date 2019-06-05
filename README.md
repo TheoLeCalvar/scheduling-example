@@ -11,9 +11,15 @@ It consists of two sub-transformations, [one](fr.eseo.atlc.example.scheduling.tr
 
 ## Install
 
-Clone this repository and import both projects into eclipse.
+A VirtualBox VM image with Eclipse installed and configured is avaiable [here](https://gdsn.fr/research/atlc.ova).
+Use `atlc` as both user and password.
 
-You need to install these dependencies:
+
+Otherwise you can directly install the demo from this repository.
+Make sure that your JRE provides a JavaFX runtime.
+Then clone this repository and import both projects into eclipse.
+
+Then you need to install these dependencies from the eclipse "Install new software" menu:
 
 - ATL (if the metapackage contains EMFTVM otherwise see note below)
 - EMF - Eclipse Modeling Framework SDK
