@@ -11,7 +11,7 @@ It consists of two sub-transformations, [one](fr.eseo.atlc.example.scheduling.tr
 
 ## Install
 
-A VirtualBox VM image with Eclipse installed and configured is avaiable [here](https://gdsn.fr/research/atlc.ova).
+A VirtualBox VM image with Eclipse installed and configured is available [here](https://gdsn.fr/research/atlc.ova).
 Use `atlc` as both user and password.
 
 
