@@ -41,3 +41,12 @@ You can also press:
 - escape tu exit the application.
 
 You can change source model by changing which file is loaded by modifing [this file](fr.eseo.atlc.example.scheduling.transfo/src/fr/eseo/atlc/example/scheduling/transfo/RunSchedulingGenerator.xtend#L81).
+
+
+## Examples
+
+
+![Interaction with a schedule](https://gdsn.fr/atlc/img/scheduling.gif)
+
+![Screenshot of a schedule](https://gdsn.fr/atlc/img/scheduling-full.png)
+
