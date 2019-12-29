@@ -11,11 +11,7 @@ It consists of two sub-transformations, [one](fr.eseo.atlc.example.scheduling.tr
 
 ## Install
 
-A VirtualBox VM image with Eclipse installed and configured is available [here](https://gdsn.fr/research/atlc.ova).
-Use `atlc` as both user and password.
-
-
-Otherwise you can directly install the demo from this repository.
+You can directly install the demo from this repository.
 Make sure that your JRE provides a JavaFX runtime.
 Then clone this repository and import both projects into eclipse.
 
